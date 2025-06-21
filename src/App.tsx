@@ -1,6 +1,5 @@
 import './App.css';
-import MapComponent from './components/Map/MapComponent';
-import DeliveryAddressInput from './components/Map/DeliveryAddressInput';
+import MapWrapper from './components/Map/MapWrapper';
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -9,8 +8,7 @@ function App() {
     <>
       <h1>TESTING</h1>
       <div>
-        <DeliveryAddressInput />
-        <MapComponent />
+        <MapWrapper />
       </div>
     </>
   );
