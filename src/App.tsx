@@ -1,5 +1,5 @@
 import './App.css';
-import Map from './components/Map/Map';
+import MapComponent from './components/Map/MapComponent';
 import DeliveryAddressInput from './components/Map/DeliveryAddressInput';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <h1>TESTING</h1>
       <div>
         <DeliveryAddressInput />
-        <Map />
+        <MapComponent />
       </div>
     </>
   );
