@@ -76,8 +76,6 @@ function Directions({
 
   // Takes care of multiple routes and selection between them
   const [routeIndex, setRouteIndex] = useState(0);
-  const selectedRoute = routes[routeIndex];
-  const leg = selectedRoute?.legs[0];
 
   const directionsRendererRef = useRef<google.maps.DirectionsRenderer | null>(
     null
@@ -87,12 +85,19 @@ function Directions({
     if (!shouldSearch || !routesLibrary || !map || !origin || !destination)
       return;
 
+    // Clear state before starting a new route search
+    setRoutes([]);
+    setRouteIndex(0);
+
+    // Clear previous directions if any
+    if (directionsRendererRef.current) {
+      directionsRendererRef.current.setMap(null);
+      directionsRendererRef.current = null;
+    }
+
     const directionsService = new routesLibrary.DirectionsService();
     const directionsRenderer = new routesLibrary.DirectionsRenderer({ map });
     directionsRendererRef.current = directionsRenderer;
-
-    console.log(directionsService);
-    console.log(directionsRenderer);
 
     directionsService
       .route({
@@ -109,9 +114,10 @@ function Directions({
         console.error('Failed to fetch directions:', err);
       })
       .finally(() => {
-        setShouldSearch(false); // reset after search
+        setShouldSearch(false);
       });
   }, [shouldSearch, origin, destination, routesLibrary, map, setShouldSearch]);
+
   console.log(routes);
 
   useEffect(() => {
@@ -119,6 +125,10 @@ function Directions({
     directionsRendererRef.current.setRouteIndex(routeIndex);
   }, [routeIndex]);
 
+  if (!routes.length) return null;
+
+  const selectedRoute = routes[routeIndex];
+  const leg = selectedRoute?.legs[0];
   if (!leg) return null;
 
   return (
