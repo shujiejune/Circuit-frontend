@@ -2,8 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import HomePage from './pages/HomePage';
-import MapPage from './pages/RoutingPage';
-import ScheduleDelivery from './pages/ScheduleDelivery';
+import DeliveryRoutingPage from './pages/DeliveryRoutingPage';
+import ScheduleDelivery from './pages/ScheduleDeliveryPage';
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -12,7 +12,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/map" element={<MapPage />} />
+        <Route path="/deliveryrouting" element={<DeliveryRoutingPage />} />
         <Route path="/scheduledelivery" element={<ScheduleDelivery />} />
       </Routes>
     </>
