@@ -1,15 +1,20 @@
+import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
-import MapWrapper from './components/Map/MapWrapper';
+import HomePage from './pages/HomePage';
+import MapPage from './pages/RoutingPage';
+import ScheduleDelivery from './pages/ScheduleDelivery';
 
 function App() {
   // const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1>TESTING</h1>
-      <div>
-        <MapWrapper />
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/map" element={<MapPage />} />
+        <Route path="/scheduledelivery" element={<ScheduleDelivery />} />
+      </Routes>
     </>
   );
 }

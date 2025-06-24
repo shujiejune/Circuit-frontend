@@ -41,7 +41,7 @@ export default function MapComponent({
             gestureHandling="greedy"
             disableDefaultUI={false}
             // mapId={}
-            // fullscreenControl={false}
+            fullscreenControl={false}
           >
             <Directions
               origin={origin}

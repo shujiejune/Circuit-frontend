@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import DeliveryAddressInput from './DeliveryAddressInput';
 import MapComponent from './MapComponent';
+import BackToHomeBtn from '../Buttons/BackToHomeBtn';
 
 export default function MapWrapper() {
   const [origin, setOrigin] = useState('');
@@ -14,6 +15,7 @@ export default function MapWrapper() {
 
   return (
     <div>
+      <BackToHomeBtn />
       <DeliveryAddressInput
         origin={origin}
         destination={destination}
