@@ -11,7 +11,9 @@ function App() {
 
   return (
     <>
-      <NavBar></NavBar>
+      <div>
+        <NavBar />
+      </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/deliveryrouting" element={<DeliveryRoutingPage />} />
