@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 export default function NavBar() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="flex ">
       <div>
-        <h3>Dispatch & Delivery System</h3>
+        <Typography>Dispatch & Delivery System</Typography>
       </div>
       <div>
         <Button
