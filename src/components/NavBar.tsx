@@ -21,7 +21,11 @@ export default function NavBar() {
     <div className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-4 ">
         <div className="whitespace-nowrap">
-          <Typography variant="h6" sx={{ color: '#3e5f1b' }}>
+          <Typography
+            variant="h6"
+            sx={{ color: '#3e5f1b' }}
+            onClick={() => navigate('/')}
+          >
             Dispatch & Delivery Management
           </Typography>
         </div>
