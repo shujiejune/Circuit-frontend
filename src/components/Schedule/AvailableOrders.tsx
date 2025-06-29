@@ -26,7 +26,7 @@ export default function AvailableOrders({
               <Typography
                 variant="subtitle1"
                 fontWeight={600}
-              >{`${item.name}   ID: ${item.product_id}`}</Typography>
+              >{`${item.name} `}</Typography>
               <Typography
                 variant="subtitle1"
                 fontWeight={600}

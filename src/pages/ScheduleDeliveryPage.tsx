@@ -252,7 +252,7 @@ export default function ScheduleDeliveryPage() {
   );
 
   return (
-    <div className="w-screen">
+    <div className="w-full">
       <div className="flex flex-col">
         <div>
           <Typography>Schedule an Order</Typography>
@@ -260,14 +260,14 @@ export default function ScheduleDeliveryPage() {
         <div className="mx-auto my-10">
           <OrderSearchBar></OrderSearchBar>
         </div>
-        <div className="flex justify-between">
-          <div className="w-2/10">
+        <div className="flex justify-evenly">
+          <div className="w-1/5">
             <FilterProducts></FilterProducts>
           </div>
-          <div className="w-5/10">
+          <div className="w-2/5">
             <AvailableOrders orders={paginatedData} />
           </div>
-          <div className="w-2/10">
+          <div className="w-1/5">
             <CartSummary></CartSummary>
           </div>
         </div>
