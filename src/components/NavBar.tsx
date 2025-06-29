@@ -23,10 +23,10 @@ export default function NavBar() {
         <div className="whitespace-nowrap">
           <Typography
             variant="h6"
-            sx={{ color: '#3e5f1b' }}
+            sx={{ color: '#3e5f1b', cursor: 'pointer' }}
             onClick={() => navigate('/')}
           >
-            Dispatch & Delivery Management
+            [Insert project logo][Insert creative name]
           </Typography>
         </div>
 

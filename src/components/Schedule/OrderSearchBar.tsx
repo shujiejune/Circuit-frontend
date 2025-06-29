@@ -1,9 +1,9 @@
-import { Paper, InputBase, IconButton } from '@mui/material';
+import { Box, Paper, InputBase, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function OrderSearchBar() {
   return (
-    <>
+    <Box>
       <Paper
         component="form"
         sx={{
@@ -22,6 +22,6 @@ export default function OrderSearchBar() {
           <SearchIcon />
         </IconButton>
       </Paper>
-    </>
+    </Box>
   );
 }
