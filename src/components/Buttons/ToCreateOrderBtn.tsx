@@ -8,10 +8,10 @@ export default function ContinueToRoutingBtn() {
     <Button
       variant="contained"
       onClick={() => {
-        navigate('/deliveryrouting');
+        navigate('/createorder');
       }}
     >
-      Create Order
+      Create an Order
     </Button>
   );
 }

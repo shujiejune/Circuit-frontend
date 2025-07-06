@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import {
   APIProvider,
   Map,
-  // AdvancedMarker,
-  // Pin,
-  // InfoWindow,
   useMap,
   useMapsLibrary,
 } from '@vis.gl/react-google-maps';
@@ -15,16 +14,26 @@ const containerStyle = {
   height: '600px',
 };
 
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Button,
+  Divider,
+} from '@mui/material';
+
 export default function MapComponent({
   origin,
   destination,
-  shouldSearch,
-  setShouldSearch,
+  routes,
 }: {
   origin: string;
   destination: string;
-  shouldSearch: boolean;
-  setShouldSearch: (val: boolean) => void;
+  routes: any[];
 }) {
   const center = {
     lat: 37.7749,
@@ -34,7 +43,7 @@ export default function MapComponent({
   return (
     <div>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-        <div style={containerStyle}>
+        <div style={containerStyle} className="flex flex-row">
           <Map
             defaultZoom={12}
             defaultCenter={center}
@@ -44,14 +53,12 @@ export default function MapComponent({
             streetViewControl={false}
             mapTypeControl={false}
             fullscreenControl={false}
-          >
-            <Directions
-              origin={origin}
-              destination={destination}
-              shouldSearch={shouldSearch}
-              setShouldSearch={setShouldSearch}
-            />
-          </Map>
+          ></Map>
+          <Directions
+            origin={origin}
+            destination={destination}
+            backendRoutes={routes}
+          />
         </div>
       </APIProvider>
     </div>
@@ -61,16 +68,15 @@ export default function MapComponent({
 function Directions({
   origin,
   destination,
-  shouldSearch,
-  setShouldSearch,
+  backendRoutes,
 }: {
   origin: string;
   destination: string;
-  shouldSearch: boolean;
-  setShouldSearch: (val: boolean) => void;
+  backendRoutes?: any[];
 }) {
   // Returns back an instance of the map (to give to directionRenderer)
   const map = useMap();
+  const navigate = useNavigate();
 
   // Load library for access to directions service and renderer
   const routesLibrary = useMapsLibrary('routes');
@@ -84,8 +90,7 @@ function Directions({
   );
 
   useEffect(() => {
-    if (!shouldSearch || !routesLibrary || !map || !origin || !destination)
-      return;
+    if (!routesLibrary || !map || !origin || !destination) return;
 
     // Clear state before starting a new route search
     setRoutes([]);
@@ -115,10 +120,8 @@ function Directions({
       .catch((err) => {
         console.error('Failed to fetch directions:', err);
       })
-      .finally(() => {
-        setShouldSearch(false);
-      });
-  }, [shouldSearch, origin, destination, routesLibrary, map, setShouldSearch]);
+      .finally(() => {});
+  }, [origin, destination, routesLibrary, map]);
 
   console.log(routes);
 
@@ -134,38 +137,88 @@ function Directions({
   if (!leg) return null;
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: '10px',
-        right: '10px',
+    <Box
+      sx={{
+        width: '100%',
+        backgroundColor: 'white',
+        borderTop: '1px solid #ddd',
+        boxShadow: '0 -2px 8px rgba(0,0,0,0.1)',
+        padding: 2,
         zIndex: 1000,
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        padding: '10px',
-        borderRadius: '8px',
-        boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
-        maxWidth: '300px',
       }}
     >
-      <h2>{selectedRoute.summary}</h2>
-      <p>
-        {leg.start_address.split(',')[0]} to {leg.end_address.split(',')[0]}
-      </p>
-      <p>Distance: {leg.distance?.text}</p>
-      <p>Duration: {leg.duration?.text}</p>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            🚚 Selected Route Summary
+          </Typography>
+          <div className="flex flex-col items-start justify-center">
+            <Typography>
+              <strong>Route:</strong> {selectedRoute.summary}
+            </Typography>
+            <Typography>
+              {/* <strong>From:</strong> {leg.start_address} */}
+              <strong>From:</strong> {leg.start_address.split(',')[0]}
+            </Typography>
+            <Typography>
+              {/* <strong>To:</strong> {leg.end_address} */}
+              <strong>To:</strong> {leg.end_address.split(',')[0]}
+            </Typography>
+            <Typography>
+              <strong>Distance:</strong> {leg.distance?.text}
+            </Typography>
+            <Typography>
+              <strong>Price:</strong> {backendRoutes[routeIndex]?.price} $
+            </Typography>
+            <Typography>
+              <strong>Duration:</strong>{' '}
+              {Math.round(
+                backendRoutes[routeIndex]?.estimated_duration / 60000000000
+              )}{' '}
+              minutes
+            </Typography>
+          </div>
 
-      <h2>Other Routes:</h2>
-      <ul>
-        {routes.map((route, index) => {
-          return (
-            <li key={route.summary}>
-              <button onClick={() => setRouteIndex(index)}>
-                {route.summary}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+          <Divider sx={{ my: 2 }} />
+
+          <Typography variant="subtitle1" gutterBottom>
+            Choose a different route:
+          </Typography>
+
+          <RadioGroup
+            value={routeIndex}
+            onChange={(e) => setRouteIndex(Number(e.target.value))}
+          >
+            {routes.map((route, index) => (
+              <FormControlLabel
+                key={route.summary}
+                value={index}
+                control={<Radio />}
+                label={route.summary}
+              />
+            ))}
+          </RadioGroup>
+
+          <Divider sx={{ my: 2 }} />
+
+          <Box display="flex" justifyContent="flex-end">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                localStorage.setItem(
+                  'selectedRoute',
+                  JSON.stringify(routes[routeIndex])
+                );
+                alert('Route confirmed!');
+                navigate('/payment');
+              }}
+            >
+              Confirm Route
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }

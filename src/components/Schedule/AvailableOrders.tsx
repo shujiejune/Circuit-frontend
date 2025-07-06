@@ -20,7 +20,7 @@ export default function AvailableOrders({
         return (
           <Box
             key={item.product_id}
-            className="bg-[#f9faf4] border-2 border-[#e5e5e5] rounded-xl p-4 mb-6 w-full"
+            className="bg-[#f9faf4] border-2 border-[#e5e5e5] rounded-xl p-4 mb-6 w-full h-[300px] flex flex-col justify-between"
           >
             <div className="flex tems-start justify-between mb-2">
               <Typography

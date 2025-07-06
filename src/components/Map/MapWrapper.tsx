@@ -1,34 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import DeliveryAddressInput from './DeliveryAddressInput';
 import MapComponent from './MapComponent';
-import BackToSchedulingBtn from '../Buttons/BackToSchedulingBtn';
+import { Box, Typography } from '@mui/material';
 
 export default function MapWrapper() {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
-  const [shouldSearch, setShouldSearch] = useState(false);
+  const [routes, setRoutes] = useState<any>([]);
 
-  const handleSearch = () => {
-    setShouldSearch(true); // trigger the search
-  };
+  useEffect(() => {
+    const stored = localStorage.getItem('routeOptions');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setRoutes(parsed);
+        if (parsed.length > 0) {
+          setOrigin(parsed[0].pickup_location);
+          setDestination(parsed[0].delivery_location);
+        }
+      } catch (e) {
+        console.error('Failed to parse routeOptions:', e);
+      }
+    }
+  }, []);
 
   return (
-    <div>
-      <BackToSchedulingBtn />
-      <DeliveryAddressInput
-        origin={origin}
-        destination={destination}
-        setOrigin={setOrigin}
-        setDestination={setDestination}
-        onSearch={handleSearch}
-      />
-      <MapComponent
-        origin={origin}
-        destination={destination}
-        shouldSearch={shouldSearch}
-        setShouldSearch={setShouldSearch}
-      />
-    </div>
+    <Box className="flex flex-col items-center justify-center p-4">
+      <Typography variant="h3">Routing</Typography>
+      <MapComponent origin={origin} destination={destination} routes={routes} />
+    </Box>
   );
 }

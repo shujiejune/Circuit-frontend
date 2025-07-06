@@ -29,6 +29,14 @@ export default function DevelopmentTestBtns() {
       >
         Delivery Routing
       </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          navigate('/createorder');
+        }}
+      >
+        Creatorder
+      </Button>
     </div>
   );
 }

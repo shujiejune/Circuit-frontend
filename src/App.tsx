@@ -3,10 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
 import DeliveryRoutingPage from './pages/DeliveryRoutingPage';
-import ScheduleDelivery from './pages/ScheduleDeliveryPage';
+import CreateOrderPage from './pages/CreateOrderPage';
+import PaymentPage from './pages/PaymentPage';
 import NavBar from './components/NavBar';
+
 // Delete for production
 import DevelopmentTestBtns from './components/Buttons/DevelopmentTestBtns';
+import ToCreateOrderBtn from './components/Buttons/ToCreateOrderBtn';
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -20,7 +23,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/deliveryrouting" element={<DeliveryRoutingPage />} />
-          <Route path="/scheduledelivery" element={<ScheduleDelivery />} />
+          <Route path="/createorder" element={<CreateOrderPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Routes>
       </div>
       <div>
