@@ -1,2 +1,2 @@
-# dispatch-and-delivery-frontend
-React frontend of a Dispatch &amp; Delivery Management Web App
+# Circuit-frontend
+React frontend of Circuit: a Dispatch &amp; Delivery Management Web App
