@@ -15,7 +15,7 @@ export default function DevelopmentTestBtns() {
     if (token) {
       localStorage.setItem('token', token);
       setIsLoggedIn(true); // <-- this triggers the rerender for ProtectedRoute
-      navigate('/account'); // or wherever you want to redirect
+      navigate('/');
     }
   };
 

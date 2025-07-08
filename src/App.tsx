@@ -15,14 +15,13 @@ import DevelopmentTestBtns from './components/Buttons/DevelopmentTestBtns';
 import AccountPage from './pages/AccountPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import AccountInformationpage from './pages/AccountInformationPage';
 import AccountInformationPage from './pages/AccountInformationPage';
 
 function App() {
   // const [count, setCount] = useState(0);
 
   return (
-    <div className="w-screen">
+    <div className="w-screen bg-gray-50">
       <div className="pb-10">
         <NavBar />
       </div>
