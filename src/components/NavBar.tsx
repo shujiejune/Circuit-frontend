@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Typography, Menu, MenuItem, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import isTokenValid from '../utils/auth';
+// import isTokenValid from '../utils/auth';
 import { useAuth } from '../context/AuthContext';
 
 export default function NavBar() {
@@ -70,7 +70,7 @@ export default function NavBar() {
               disableRipple
               disableFocusRipple
               size="large"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/account')}
               sx={{
                 backgroundColor: '', // default color
                 color: '#000000', // text color

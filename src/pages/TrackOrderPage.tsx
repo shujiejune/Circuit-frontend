@@ -1,3 +1,5 @@
+import Orders from '../components/Account/Orders';
+
 export default function TrackOrderPage() {
-  return <div>TrackORder</div>;
+  return <Orders></Orders>;
 }

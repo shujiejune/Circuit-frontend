@@ -15,6 +15,8 @@ import DevelopmentTestBtns from './components/Buttons/DevelopmentTestBtns';
 import AccountPage from './pages/AccountPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import AccountInformationpage from './pages/AccountInformationPage';
+import AccountInformationPage from './pages/AccountInformationPage';
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -67,6 +69,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <AccountPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/accountsummary"
+            element={
+              <ProtectedRoute>
+                <AccountInformationPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <TrackOrderPage />
               </ProtectedRoute>
             }
           />

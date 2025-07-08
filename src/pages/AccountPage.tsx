@@ -1,11 +1,32 @@
+import { Box, Typography, Button } from '@mui/material';
+
+import { useNavigate } from 'react-router-dom';
+
 export default function AccountPage() {
+  const navigate = useNavigate();
   return (
-    <div>
-      <h1>Account Page</h1>
-      <p>
-        This is the account page where users can manage their account details.
-      </p>
-      {/* Add your account management components here */}
-    </div>
+    <Box>
+      <Typography>My Account</Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        onClick={() => {
+          navigate('/accountsummary');
+        }}
+      >
+        Account Information
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        onClick={() => {
+          navigate('/orders');
+        }}
+      >
+        Track Orders
+      </Button>
+    </Box>
   );
 }
