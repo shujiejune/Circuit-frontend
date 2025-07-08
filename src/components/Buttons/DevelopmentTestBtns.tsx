@@ -14,7 +14,7 @@ export default function DevelopmentTestBtns() {
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywiZW1haWwiOiJ0ZXN0QGVtYWlsLmNvbSIsImV4cCI6MjAwMDAwMDAwMDB9.sflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
     if (token) {
       localStorage.setItem('token', token);
-      setIsLoggedIn(true); // <-- this triggers the rerender for ProtectedRoute
+      setIsLoggedIn(true); //  triggers the rerender for ProtectedRoute
       navigate('/');
     }
   };
@@ -70,6 +70,7 @@ export default function DevelopmentTestBtns() {
         onClick={() => {
           localStorage.removeItem('token'); // Simulate logout by removing the token
           setIsLoggedIn(false);
+          navigate('/'); 
         }}
       >
         Simulate Logout

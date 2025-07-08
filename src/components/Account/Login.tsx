@@ -1,9 +1,9 @@
 import {
-  Box,
   Link,
   Typography,
   TextField,
   Button,
+  Box,
   ThemeProvider,
   createTheme,
 } from '@mui/material';
@@ -42,57 +42,64 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center justify-center gap-4 p-4 w-full max-w-lg">
-          <Typography variant="h4" sx={{ color: '#3e5f1b' }}>
-            Login
-          </Typography>
-
-          <TextField
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={errors.email}
-            helperText={errors.email ? 'Invalid email address' : ''}
-            fullWidth
-            color="primary"
-          />
-          <TextField
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={errors.password}
-            helperText={
-              errors.password
-                ? 'Password must be at least 8 characters and include a number'
-                : ''
-            }
-            fullWidth
-            color="primary"
-          />
-          <div className="flex flex-col items-center gap-4">
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+    <Box className="flex items-center justify-center min-h-screen">
+      <ThemeProvider theme={theme}>
+        <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-lg p-8">
+          <div className="flex flex-col items-center justify-center gap-4 p-4 w-full max-w-lg">
+            <Typography variant="h4" sx={{ color: '#3e5f1b' }}>
               Login
-            </Button>
-            <Typography>
-              Don't have an account yet?
-              <Link
-                //   href=""
-                onClick={() => {
-                  navigate('/signup');
-                }}
-              >
-                Sign Up Here!
-              </Link>
             </Typography>
-          </div>
-          <div>
-            <Button>PLACE HOLDER FOR GOOGLE OAUTH</Button>
+
+            <TextField
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email}
+              helperText={errors.email ? 'Invalid email address' : ''}
+              fullWidth
+              color="primary"
+            />
+            <TextField
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+              helperText={
+                errors.password
+                  ? 'Password must be at least 8 characters and include a number'
+                  : ''
+              }
+              fullWidth
+              color="primary"
+            />
+            <div className="flex flex-col">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+              >
+                Login
+              </Button>
+              <Typography>
+                Don't have an account yet?{' '}
+                <Link
+                  //   href=""
+                  onClick={() => {
+                    navigate('/signup');
+                  }}
+                >
+                  {' '}
+                  Sign Up Here!
+                </Link>
+              </Typography>
+            </div>
+            <div>
+              <Button>PLACE HOLDER FOR GOOGLE OAUTH</Button>
+            </div>
           </div>
         </div>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Box>
   );
 }

@@ -24,14 +24,19 @@ export default function NavBar() {
 
   return (
     <div className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-4 ">
-        <div className="whitespace-nowrap">
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between p x-4 py-4 ">
+        <div className="whitespace-nowrap flex items-center gap-5">
+          <img
+            src="/circuit.png"
+            alt="Circuit logo"
+            className="h-12 w-auto"
+          ></img>
           <Typography
-            variant="h4"
+            variant="h3"
             sx={{ color: '#3e5f1b', cursor: 'pointer' }}
             onClick={() => navigate('/')}
           >
-            [Insert project logo] Circuit
+            Circuit
           </Typography>
         </div>
 

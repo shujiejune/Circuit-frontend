@@ -2,7 +2,13 @@ import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { TextField, Typography, Button, createTheme, ThemeProvider } from '@mui/material';
+import {
+  TextField,
+  Typography,
+  Button,
+  createTheme,
+  ThemeProvider,
+} from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -157,7 +163,9 @@ export default function CreateOrderPage() {
               label="Pickup Date"
               value={pickupDate}
               onChange={(newDate) => setPickupDate(newDate)}
-              renderInput={(params) => <TextField {...params} fullWidth color="primary" />}
+              renderInput={(params) => (
+                <TextField {...params} fullWidth color="primary" />
+              )}
               slotProps={{
                 textField: { fullWidth: true },
               }}

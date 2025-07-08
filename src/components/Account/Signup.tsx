@@ -1,8 +1,8 @@
 import {
-  Box,
   Link,
   TextField,
   Button,
+  Box,
   Typography,
   ThemeProvider,
   createTheme,
@@ -61,78 +61,85 @@ export default function Signup() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="flex flex-col items-center">
-        <div className="flex flex-col items-center justify-center gap-4 p-4 w-full max-w-lg">
-          <Typography variant="h4" sx={{ color: '#3e5f1b' }}>
-            Sign Up
-          </Typography>
-
-          <TextField
-            label="Nickname"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            error={errors.nickname}
-            helperText={errors.nickname ? 'Nickname is required' : ''}
-            fullWidth
-            color="primary"
-          />
-          <TextField
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={errors.email}
-            helperText={errors.email ? 'Invalid email address' : ''}
-            fullWidth
-            color="primary"
-          />
-          <TextField
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={errors.password}
-            helperText={
-              errors.password
-                ? 'Password must be at least 8 characters and include a number'
-                : ''
-            }
-            fullWidth
-            color="primary"
-          />
-          <TextField
-            label="Confirm Password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            error={errors.confirmPassword}
-            helperText={
-              errors.confirmPassword
-                ? errors.mismatch
-                  ? 'Passwords do not match'
-                  : 'Confirm password is required'
-                : ''
-            }
-            fullWidth
-            color="primary"
-          />
-          <div className="flex flex-col">
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+    <Box className="flex items-center justify-center min-h-screen">
+      <ThemeProvider theme={theme}>
+        <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-lg p-8">
+          <div className="flex flex-col items-center justify-center gap-4 p-4 w-full max-w-lg">
+            <Typography variant="h4" sx={{ color: '#3e5f1b' }}>
               Sign Up
-            </Button>
-            <Typography>
-              Already have an account?
-              <Link
-                onClick={() => {
-                  navigate('/login');
-                }}
-              >
-                Log In Here!
-              </Link>
             </Typography>
+
+            <TextField
+              label="Nickname"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+              error={errors.nickname}
+              helperText={errors.nickname ? 'Nickname is required' : ''}
+              fullWidth
+              color="primary"
+            />
+            <TextField
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email}
+              helperText={errors.email ? 'Invalid email address' : ''}
+              fullWidth
+              color="primary"
+            />
+            <TextField
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+              helperText={
+                errors.password
+                  ? 'Password must be at least 8 characters and include a number'
+                  : ''
+              }
+              fullWidth
+              color="primary"
+            />
+            <TextField
+              label="Confirm Password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              error={errors.confirmPassword}
+              helperText={
+                errors.confirmPassword
+                  ? errors.mismatch
+                    ? 'Passwords do not match'
+                    : 'Confirm password is required'
+                  : ''
+              }
+              fullWidth
+              color="primary"
+            />
+            <div className="flex flex-col">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+              >
+                Sign Up
+              </Button>
+              <Typography>
+                Already have an account?{' '}
+                <Link
+                  onClick={() => {
+                    navigate('/login');
+                  }}
+                >
+                  {' '}
+                  Log In Here!
+                </Link>
+              </Typography>
+            </div>
           </div>
         </div>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Box>
   );
 }
