@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { TextField, Typography, Button } from '@mui/material';
+import { TextField, Typography, Button, createTheme, ThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -32,6 +32,14 @@ const mockData = [
     estimated_duration: 3990000000000,
   },
 ];
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#3e5f1b',
+    },
+  },
+});
 
 export default function CreateOrderPage() {
   const navigate = useNavigate();
@@ -110,58 +118,66 @@ export default function CreateOrderPage() {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <div className="flex flex-col items-center justify-center gap-4 p-4 w-full max-w-lg">
-          <Typography variant="h4">Create an Order</Typography>
+    <ThemeProvider theme={theme}>
+      <div className="flex flex-col items-center">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <div className="flex flex-col items-center justify-center gap-4 p-4 w-full max-w-lg">
+            <Typography variant="h4" sx={{ color: '#3e5f1b' }}>
+              Create an Order
+            </Typography>
 
-          <TextField
-            label="Pickup Address"
-            value={pickupAddress}
-            onChange={(e) => setPickupAddress(e.target.value)}
-            error={errors.pickupAddress}
-            fullWidth
-          />
+            <TextField
+              label="Pickup Address"
+              value={pickupAddress}
+              onChange={(e) => setPickupAddress(e.target.value)}
+              error={errors.pickupAddress}
+              fullWidth
+              color="primary"
+            />
 
-          <TextField
-            label="Dropoff Address"
-            value={dropoffAddress}
-            onChange={(e) => setDropoffAddress(e.target.value)}
-            error={errors.dropoffAddress}
-            fullWidth
-          />
+            <TextField
+              label="Dropoff Address"
+              value={dropoffAddress}
+              onChange={(e) => setDropoffAddress(e.target.value)}
+              error={errors.dropoffAddress}
+              fullWidth
+              color="primary"
+            />
 
-          <TextField
-            label="Item Weight"
-            value={itemWeight}
-            onChange={(e) => setItemWeight(e.target.value)}
-            error={errors.itemWeight}
-            fullWidth
-          />
+            <TextField
+              label="Item Weight"
+              value={itemWeight}
+              onChange={(e) => setItemWeight(e.target.value)}
+              error={errors.itemWeight}
+              fullWidth
+              color="primary"
+            />
 
-          <DatePicker
-            label="Pickup Date"
-            value={pickupDate}
-            onChange={(newDate) => setPickupDate(newDate)}
-            renderInput={(params) => <TextField {...params} fullWidth />}
-            slotProps={{
-              textField: { fullWidth: true },
-            }}
-          />
+            <DatePicker
+              label="Pickup Date"
+              value={pickupDate}
+              onChange={(newDate) => setPickupDate(newDate)}
+              renderInput={(params) => <TextField {...params} fullWidth color="primary" />}
+              slotProps={{
+                textField: { fullWidth: true },
+              }}
+            />
 
-          <TimeField
-            label="Pickup Time"
-            value={pickupTime}
-            onChange={(newTime) => setPickupTime(newTime)}
-            format="HH:mm"
-            fullWidth
-          />
+            <TimeField
+              label="Pickup Time"
+              value={pickupTime}
+              onChange={(newTime) => setPickupTime(newTime)}
+              format="HH:mm"
+              fullWidth
+              color="primary"
+            />
 
-          <Button variant="contained" onClick={handleSubmit}>
-            Submit Order
-          </Button>
-        </div>
-      </LocalizationProvider>
-    </div>
+            <Button variant="contained" onClick={handleSubmit}>
+              Submit Order
+            </Button>
+          </div>
+        </LocalizationProvider>
+      </div>
+    </ThemeProvider>
   );
 }

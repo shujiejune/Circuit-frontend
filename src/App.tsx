@@ -1,15 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 
+import ProtectedRoute from './components/ProtectedRoutes';
+
 import './App.css';
 import HomePage from './pages/HomePage';
 import DeliveryRoutingPage from './pages/DeliveryRoutingPage';
 import CreateOrderPage from './pages/CreateOrderPage';
+import TrackOrderPage from './pages/TrackOrderPage';
 import PaymentPage from './pages/PaymentPage';
 import NavBar from './components/NavBar';
 
 // Delete for production
 import DevelopmentTestBtns from './components/Buttons/DevelopmentTestBtns';
-import ToCreateOrderBtn from './components/Buttons/ToCreateOrderBtn';
+import AccountPage from './pages/AccountPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -22,9 +27,49 @@ function App() {
       <div className="pt-10">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/deliveryrouting" element={<DeliveryRoutingPage />} />
-          <Route path="/createorder" element={<CreateOrderPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+
+          <Route
+            path="/deliveryrouting"
+            element={
+              <ProtectedRoute>
+                <DeliveryRoutingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/createorder"
+            element={
+              <ProtectedRoute>
+                <CreateOrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <ProtectedRoute>
+                <PaymentPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trackorder"
+            element={
+              <ProtectedRoute>
+                <TrackOrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <AccountPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
       <div>

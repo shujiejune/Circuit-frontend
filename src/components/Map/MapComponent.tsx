@@ -80,10 +80,13 @@ function Directions({
 
   // Load library for access to directions service and renderer
   const routesLibrary = useMapsLibrary('routes');
-  const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([]);
 
+  // Holds the routes fetched from the DirectionsService
+  const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([]);
   // Takes care of multiple routes and selection between them
   const [routeIndex, setRouteIndex] = useState(0);
+  // Loads components only when ready
+  const [isReady, setIsReady] = useState(false);
 
   const directionsRendererRef = useRef<google.maps.DirectionsRenderer | null>(
     null
@@ -91,10 +94,14 @@ function Directions({
 
   useEffect(() => {
     if (!routesLibrary || !map || !origin || !destination) return;
+    console.log('origin:', origin);
+    console.log('destination:', destination);
+    console.log('routesLibrary:', routesLibrary);
 
     // Clear state before starting a new route search
     setRoutes([]);
     setRouteIndex(0);
+    setIsReady(false);
 
     // Clear previous directions if any
     if (directionsRendererRef.current) {
@@ -102,25 +109,31 @@ function Directions({
       directionsRendererRef.current = null;
     }
 
-    const directionsService = new routesLibrary.DirectionsService();
-    const directionsRenderer = new routesLibrary.DirectionsRenderer({ map });
-    directionsRendererRef.current = directionsRenderer;
+    const timer = setTimeout(() => {
+      const directionsService = new routesLibrary.DirectionsService();
+      const directionsRenderer = new routesLibrary.DirectionsRenderer({ map });
+      directionsRendererRef.current = directionsRenderer;
 
-    directionsService
-      .route({
-        origin,
-        destination,
-        travelMode: google.maps.TravelMode.DRIVING,
-        provideRouteAlternatives: true,
-      })
-      .then((response) => {
-        directionsRenderer.setDirections(response);
-        setRoutes(response.routes);
-      })
-      .catch((err) => {
-        console.error('Failed to fetch directions:', err);
-      })
-      .finally(() => {});
+      directionsService
+        .route({
+          origin,
+          destination,
+          travelMode: google.maps.TravelMode.DRIVING,
+          provideRouteAlternatives: true,
+        })
+        .then((response) => {
+          directionsRenderer.setDirections(response);
+          setRoutes(response.routes);
+          setIsReady(true);
+        })
+        .catch((err) => {
+          console.error('Failed to fetch directions:', err);
+        })
+        .finally(() => {
+          // finally
+        });
+    }, 200);
+    return () => clearTimeout(timer);
   }, [origin, destination, routesLibrary, map]);
 
   console.log(routes);
@@ -130,7 +143,25 @@ function Directions({
     directionsRendererRef.current.setRouteIndex(routeIndex);
   }, [routeIndex]);
 
-  if (!routes.length) return null;
+  const HandleChooseRoute = async () => {
+    try {
+      // CALL API to create order with selected route
+      localStorage.setItem('selectedRoute', JSON.stringify(routes[routeIndex]));
+      alert('Route confirmed!');
+      navigate('/payment');
+    } catch (e) {
+      console.log('Error saving route:', e);
+    } finally {
+      // final
+    }
+  };
+
+  if (!isReady || !routes.length)
+    return (
+      <Box sx={{ padding: 2 }}>
+        <Typography>Loading directions...</Typography>
+      </Box>
+    );
 
   const selectedRoute = routes[routeIndex];
   const leg = selectedRoute?.legs[0];
@@ -205,14 +236,7 @@ function Directions({
             <Button
               variant="contained"
               color="primary"
-              onClick={() => {
-                localStorage.setItem(
-                  'selectedRoute',
-                  JSON.stringify(routes[routeIndex])
-                );
-                alert('Route confirmed!');
-                navigate('/payment');
-              }}
+              onClick={HandleChooseRoute}
             >
               Confirm Route
             </Button>

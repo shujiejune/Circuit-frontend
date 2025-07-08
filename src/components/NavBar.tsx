@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Button, Typography, Menu, MenuItem, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+
+import isTokenValid from '../utils/auth';
+import { useAuth } from '../context/AuthContext';
 
 export default function NavBar() {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { isLoggedIn } = useAuth();
 
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -22,11 +27,11 @@ export default function NavBar() {
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-4 ">
         <div className="whitespace-nowrap">
           <Typography
-            variant="h6"
+            variant="h4"
             sx={{ color: '#3e5f1b', cursor: 'pointer' }}
             onClick={() => navigate('/')}
           >
-            [Insert project logo][Insert creative name]
+            [Insert project logo] Circuit
           </Typography>
         </div>
 
@@ -37,6 +42,7 @@ export default function NavBar() {
             disableElevation
             disableRipple
             disableFocusRipple
+            size="large"
             onClick={() => navigate('/')}
             sx={{
               backgroundColor: 'none', // default color
@@ -58,55 +64,59 @@ export default function NavBar() {
             Contact Us
           </Button>
 
-          <Button
-            disableElevation
-            disableRipple
-            disableFocusRipple
-            onClick={() => navigate('/')}
-            sx={{
-              backgroundColor: '', // default color
-              color: '#000000', // text color
-              '&:hover': {
-                backgroundColor: '#e8f0e0',
-              },
-              '&:active': {
-                backgroundColor: '',
-              },
-              '&.Mui-focusVisible': {
-                boxShadow: 'none',
-              },
-              '&:focus': {
-                outline: 'none',
-              },
-            }}
-          >
-            Cart
-          </Button>
-
-          <Button
-            disableElevation
-            disableRipple
-            disableFocusRipple
-            onClick={() => navigate('/')}
-            sx={{
-              backgroundColor: '', // default color
-              color: '#000000', // text color
-              '&:hover': {
-                backgroundColor: '#e8f0e0',
-              },
-              '&:active': {
-                backgroundColor: '',
-              },
-              '&.Mui-focusVisible': {
-                boxShadow: 'none',
-              },
-              '&:focus': {
-                outline: 'none',
-              },
-            }}
-          >
-            Login
-          </Button>
+          {isLoggedIn ? (
+            <Button
+              disableElevation
+              disableRipple
+              disableFocusRipple
+              size="large"
+              onClick={() => navigate('/')}
+              sx={{
+                backgroundColor: '', // default color
+                color: '#000000', // text color
+                '&:hover': {
+                  backgroundColor: '#e8f0e0',
+                },
+                '&:active': {
+                  backgroundColor: '',
+                },
+                '&.Mui-focusVisible': {
+                  boxShadow: 'none',
+                },
+                '&:focus': {
+                  outline: 'none',
+                },
+              }}
+            >
+              My Account
+            </Button>
+          ) : (
+            <Button
+              disableElevation
+              disableRipple
+              disableFocusRipple
+              size="large"
+              onClick={() => navigate('/login')}
+              sx={{
+                backgroundColor: '', // default color
+                color: '#000000', // text color
+                '&:hover': {
+                  backgroundColor: '#e8f0e0',
+                },
+                '&:active': {
+                  backgroundColor: '',
+                },
+                '&.Mui-focusVisible': {
+                  boxShadow: 'none',
+                },
+                '&:focus': {
+                  outline: 'none',
+                },
+              }}
+            >
+              Login / Signup
+            </Button>
+          )}
         </div>
 
         {/* This div section is used to display collapasble menu for navigation buttons for small screens */}
@@ -122,7 +132,6 @@ export default function NavBar() {
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
             <MenuItem onClick={() => handleMenuClose('/')}>Contact Us</MenuItem>
-            <MenuItem onClick={() => handleMenuClose('/')}>Cart</MenuItem>
             <MenuItem onClick={() => handleMenuClose('/')}>Login</MenuItem>
           </Menu>
         </div>
