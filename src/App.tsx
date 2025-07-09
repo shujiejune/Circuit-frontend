@@ -21,7 +21,7 @@ function App() {
   // const [count, setCount] = useState(0);
 
   return (
-    <div className="w-full bg-gray-50">
+    <div className="w-screen bg-gray-50">
       <div className="pb-10">
         <NavBar />
       </div>
