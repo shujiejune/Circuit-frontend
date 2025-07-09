@@ -25,7 +25,7 @@ export default function HomePage() {
         sx={{
           height: '800px',
           width: '100%',
-          // backgroundImage: 'url(/banner3.png)',
+          backgroundImage: 'url(/banner3.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -160,7 +160,7 @@ export default function HomePage() {
             </Box>
             <Box sx={{ flex: 1, textAlign: 'center' }}>
               <img
-                // src="/banner4.png"
+                src="/banner4.png"
                 alt="drone delivery illustration"
                 style={{
                   maxWidth: '100%',
