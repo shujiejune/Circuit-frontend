@@ -6,7 +6,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import DeliveryRoutingPage from './pages/DeliveryRoutingPage';
 import CreateOrderPage from './pages/CreateOrderPage';
-import TrackOrderPage from './pages/TrackOrderPage';
+import TrackOrdersPage from './pages/TrackOrdersPage';
 import PaymentPage from './pages/PaymentPage';
 import NavBar from './components/NavBar';
 
@@ -59,7 +59,7 @@ function App() {
             path="/trackorder"
             element={
               <ProtectedRoute>
-                <TrackOrderPage />
+                <TrackOrdersPage />
               </ProtectedRoute>
             }
           />
@@ -80,10 +80,10 @@ function App() {
             }
           />
           <Route
-            path="/orders"
+            path="/trackorders"
             element={
               <ProtectedRoute>
-                <TrackOrderPage />
+                <TrackOrdersPage />
               </ProtectedRoute>
             }
           />

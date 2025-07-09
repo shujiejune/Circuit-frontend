@@ -25,7 +25,7 @@ export default function HomePage() {
         sx={{
           height: '800px',
           width: '100%',
-          backgroundImage: 'url(/banner3.png)',
+          // backgroundImage: 'url(/banner3.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -64,8 +64,8 @@ export default function HomePage() {
           }}
         >
           <Typography
-            variant="h3"
-            sx={{ mb: 3, color: '#333', textAlign: 'justify' }}
+            variant="h4"
+            sx={{ textAlign: 'left', fontWeight: 'bold', mb: 4 }}
           >
             About Us:
           </Typography>
@@ -160,7 +160,7 @@ export default function HomePage() {
             </Box>
             <Box sx={{ flex: 1, textAlign: 'center' }}>
               <img
-                src="/banner4.png"
+                // src="/banner4.png"
                 alt="drone delivery illustration"
                 style={{
                   maxWidth: '100%',

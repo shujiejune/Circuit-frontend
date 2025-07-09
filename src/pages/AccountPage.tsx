@@ -37,7 +37,7 @@ export default function AccountPage() {
             color="primary"
             fullWidth
             onClick={() => {
-              navigate('/orders');
+              navigate('/trackorders');
             }}
           >
             Track Orders
