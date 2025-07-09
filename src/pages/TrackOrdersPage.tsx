@@ -333,7 +333,7 @@ export default function TrackOrdersPage() {
 
   return (
     <Box className="flex flex-col justify-center items-center py-8 px-auto ">
-      <Box className="flex items-center justify-center mb-4 gap-10">
+      <Box className="flex flex-col items-center justify-center mb-4 gap-5">
         <Typography variant="h4">My Orders</Typography>
         <Typography>x items</Typography>
       </Box>
